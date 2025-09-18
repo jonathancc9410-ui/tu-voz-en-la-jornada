@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan Contreras - Representante Estudiantil SENA</title>
+    <style>
+        :root {
+            --sena-verde: #39A900;
+            --sena-verde-oscuro: #2d7a00;
+            --sena-naranja: #FF8C00;
+            --sena-naranja-oscuro: #e67c00;
+            --sena-azul: #004884;
+            --sena-gris: #f5f5f5;
+            --sena-blanco: #ffffff;
+            --sombra: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--sena-verde) 0%, var(--sena-azul) 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: var(--sena-blanco);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--sombra);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: var(--sena-verde);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo h1 {
+            color: var(--sena-verde);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: var(--sena-verde);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--sena-verde-oscuro);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--sena-naranja);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--sena-naranja-oscuro);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--sena-verde);
+            border: 2px solid var(--sena-verde);
+        }
+
+        .btn-outline:hover {
+            background: var(--sena-verde);
+            color: white;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        .btn-small {
+            padding: 0.4rem 0.8rem;
+            font-size: 12px;
+        }
+
+        .main-container {
+            margin-top: 80px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 20px;
+        }
+
+        .view {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        .public-view, .admin-panel {
+            background: var(--sena-blanco);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px var(--sombra);
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--sena-verde), var(--sena-azul));
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .perfil-section {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .perfil-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--sombra);
+            text-align: center;
+        }
+
+        .avatar-display {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: var(--sena-verde);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            overflow: hidden;
+        }
+
+        .avatar-display img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .propuestas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .propuesta-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--sombra);
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--sena-naranja);
+        }
+
+        .propuesta-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .propuesta-card h3 {
+            color: var(--sena-verde);
+            margin-bottom: 1rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--sena-gris);
+            border-radius: 10px;
+            border-left: 4px solid var(--sena-verde);
+        }
+
+        .form-section h3 {
+            color: var(--sena-verde);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--sena-azul);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--sena-verde);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-upload input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-upload-btn {
+            background: var(--sena-naranja);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-block;
+            transition: background 0.3s ease;
+        }
+
+        .file-upload-btn:hover {
+            background: var(--sena-naranja-oscuro);
+        }
+
+        .propuesta-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--sena-naranja);
+            box-shadow: 0 2px 10px var(--sombra);
+        }
+
+        .propuesta-item h4 {
+            color: var(--sena-verde);
+            margin-bottom: 0.5rem;
+        }
+
+        .propuesta-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #28a745;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .perfil-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .main-container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-placeholder">JC</div>
+                <h1>Jonathan Contreras - SENA 2024</h1>
+            </div>
+            <div class="nav-buttons">
+                <button class="btn btn-outline" onclick="showView('public')">Vista Pública</button>
+                <button class="btn btn-primary" id="admin-btn" onclick="requestAdminAccess()" style="display: none;">🔐 Admin</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Vista Pública -->
+        <div id="public-view" class="view active">
+            <div class="public-view">
+                <div class="hero-section">
+                    <h1 id="display-nombre">Jonathan Contreras Cárdenas</h1>
+                    <p id="display-eslogan">Tu confianza, Mi mayor fuerza - Vota 37</p>
+                    <button class="btn btn-secondary" onclick="scrollToPropuestas()">Ver Propuestas</button>
+                </div>
+
+                <div class="perfil-section">
+                    <div class="perfil-card">
+                        <div class="avatar-display" id="display-avatar">👨‍🎓</div>
+                        <h2 id="display-nombre-perfil">Jonathan Contreras</h2>
+                        <p><strong>Programa:</strong> <span id="display-programa">Tecnólogo en Gestión Empresarial</span></p>
+                        <p><strong>Ficha:</strong> <span id="display-ficha">3174095</span></p>
+                    </div>
+                    
+                    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px var(--sombra);">
+                        <h2 style="color: var(--sena-verde); margin-bottom: 1rem;">Sobre Mí</h2>
+                        <div id="display-biografia">
+                            <p>Soy una persona equilibrada con intereses diversos que incluyen deporte (ciclismo, fútbol), lectura, tecnología (videojuegos, computación) y valores familiares sólidos. Con esta diversidad de intereses reflejo una personalidad bien estructurada y capacidad de balance vida-trabajo-estudio.</p>
+                        </div>
+                        
+                        <h3 style="color: var(--sena-azul); margin: 1.5rem 0 1rem;">Experiencia</h3>
+                        <div id="display-experiencia">
+                            <p>Mi sólida trayectoria profesional de más de 7 años en el sector contable-financiero, donde he demostrado los valores institucionales del SENA: responsabilidad, honestidad, respeto y colaboración. Mi experiencia progresiva desde auxiliar hasta analista contable en empresas del sector bancario, cooperativo, privado y público, complementada con mi formación continua en el SENA, mi liderazgo en proyectos de la comunidad a la que pertenezco.</p>
+                        </div>
+
+                        <h3 style="color: var(--sena-azul); margin: 1.5rem 0 1rem;">Contacto</h3>
+                        <div id="display-contacto">
+                            <p>📧 <span id="display-email">Jonathancontabilidad.96@gmail.com</span></p>
+                            <p>📱 <span id="display-telefono">+57 301 133 7375</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px var(--sombra);">
+                    <h2 style="color: var(--sena-verde); margin-bottom: 2rem; text-align: center;">Mis Propuestas</h2>
+                    <div class="propuestas-grid" id="display-propuestas">
+                        <!-- Las propuestas se cargan automáticamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de Administración -->
+        <div id="admin-view" class="view">
+            <div class="admin-panel">
+                <h2 style="color: var(--sena-verde); margin-bottom: 2rem; text-align: center;">Panel de Administración</h2>
+                
+                <div id="success-message" class="success-message" style="display: none;">
+                    ¡Información actualizada correctamente!
+                </div>
+
+                <!-- Sección Perfil -->
+                <div class="form-section">
+                    <h3>👤 Información Personal</h3>
+                    <div class="form-group">
+                        <label>Nombre Completo:</label>
+                        <input type="text" id="admin-nombre" placeholder="Tu nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label>Eslogan de Campaña:</label>
+                        <input type="text" id="admin-eslogan" placeholder="Tu eslogan principal">
+                    </div>
+                    <div class="form-group">
+                        <label>Programa de Formación:</label>
+                        <input type="text" id="admin-programa" placeholder="Ej: Tecnólogo en Análisis y Desarrollo de Sistemas de Información">
+                    </div>
+                    <div class="form-group">
+                        <label>Número de Ficha:</label>
+                        <input type="text" id="admin-ficha" placeholder="Ej: 2558346">
+                    </div>
+                    <div class="form-group">
+                        <label>Biografía:</label>
+                        <textarea id="admin-biografia" placeholder="Cuéntanos sobre ti, tus motivaciones y por qué quieres ser representante estudiantil..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Experiencia:</label>
+                        <textarea id="admin-experiencia" placeholder="Describe tu experiencia previa, participación en grupos estudiantiles, liderazgo, etc..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Email de Contacto:</label>
+                        <input type="email" id="admin-email" placeholder="tu.correo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono:</label>
+                        <input type="tel" id="admin-telefono" placeholder="+57 300 123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label>Foto de Perfil:</label>
+                        <div class="file-upload">
+                            <input type="file" id="admin-foto" accept="image/*" onchange="handleFileUpload(this)">
+                            <label for="admin-foto" class="file-upload-btn">📸 Subir Foto</label>
+                        </div>
+                        <small style="color: #666; display: block; margin-top: 5px;">Formatos: JPG, PNG, GIF (máx. 5MB)</small>
+                    </div>
+                    <button class="btn btn-primary" onclick="updateProfile()">💾 Guardar Perfil</button>
+                </div>
+
+                <!-- Sección Propuestas -->
+                <div class="form-section">
+                    <h3>📋 Gestión de Propuestas</h3>
+                    <div class="form-group">
+                        <label>Título de la Propuesta:</label>
+                        <input type="text" id="propuesta-titulo" placeholder="Ej: Mejora en Recursos Tecnológicos">
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción:</label>
+                        <textarea id="propuesta-descripcion" placeholder="Describe detalladamente tu propuesta..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Categoría:</label>
+                        <select id="propuesta-categoria">
+                            <option value="academica">🎓 Académica</option>
+                            <option value="bienestar">🤝 Bienestar Estudiantil</option>
+                            <option value="infraestructura">🏢 Infraestructura</option>
+                            <option value="tecnologia">💻 Tecnología</option>
+                            <option value="cultural">🎨 Cultural y Deportiva</option>
+                            <option value="sostenibilidad">🌱 Sostenibilidad</option>
+                            <option value="empleo">💼 Empleabilidad</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary" onclick="addPropuesta()">➕ Agregar Propuesta</button>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h4 style="color: var(--sena-azul); margin-bottom: 1rem;">Propuestas Agregadas:</h4>
+                        <div id="propuestas-list">
+                            <!-- Las propuestas se cargan aquí -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de Respaldo y Restauración -->
+                <div class="form-section">
+                    <h3>💾 Respaldo y Restauración</h3>
+                    <p style="margin-bottom: 1rem; color: #666;">Guarda una copia de seguridad de toda tu información para no perderla.</p>
+                    
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                        <button class="btn btn-primary" onclick="downloadBackup()">📥 Descargar Respaldo</button>
+                        <div class="file-upload">
+                            <input type="file" id="restore-file" accept=".json" onchange="restoreBackup(this)">
+                            <label for="restore-file" class="file-upload-btn">📤 Restaurar Respaldo</label>
+                        </div>
+                        <button class="btn btn-secondary" onclick="resetToDefaults()">🔄 Restaurar Datos Por Defecto</button>
+                    </div>
+                    
+                    <div style="background: #fff3cd; padding: 1rem; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 1rem;">
+                        <strong>💡 Importante:</strong> Los datos predeterminados están configurados directamente en el código. Al publicar, tu información será visible automáticamente sin necesidad de cargar archivos.
+                    </div>
+
+                    <div style="background: #d4edda; padding: 1rem; border-radius: 8px; border-left: 4px solid #28a745;">
+                        <strong>✅ Cómo funciona:</strong>
+                        <ul style="margin: 0.5rem 0 0 1rem;">
+                            <li>Tus datos están guardados en el código fuente</li>
+                            <li>Al abrir la página, se cargan automáticamente</li>
+                            <li>Los visitantes ven tu información sin configuración adicional</li>
+                            <li>Los cambios que hagas se guardan encima de los datos predeterminados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de acceso admin -->
+    <div id="admin-login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminModal()">&times;</span>
+            <h3 style="color: var(--sena-verde); margin-bottom: 1rem;">🔐 Acceso de Administrador</h3>
+            <p style="margin-bottom: 1rem;">Ingresa la contraseña para acceder al panel de administración:</p>
+            <div class="form-group">
+                <input type="password" id="admin-password" placeholder="Contraseña" style="width: 100%; padding: 0.8rem; border: 2px solid #ddd; border-radius: 8px;">
+            </div>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: flex-end;">
+                <button class="btn btn-outline" onclick="closeAdminModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="verifyAdminPassword()">Acceder</button>
+            </div>
+            <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; font-size: 0.9rem; color: #666;">
+                <strong>💡 Para desarrolladores:</strong><br>
+                Para habilitar el acceso admin, presiona <kbd>Ctrl + Shift + A</kbd> o cambia la variable <code>adminMode</code> en el código.
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 style="color: var(--sena-verde); margin-bottom: 1rem;">Confirmar Eliminación</h3>
+            <p>¿Estás seguro de que quieres eliminar esta propuesta?</p>
+            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: flex-end;">
+                <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================
+        // DATOS PREDETERMINADOS (CONFIGURACIÓN DE JONATHAN)
+        // ==============================================
+        
+        const DEFAULT_PROFILE_DATA = {
+            nombre: "Jonathan Contreras Cárdenas",
+            eslogan: "Tu confianza, Mi mayor fuerza - Vota 37",
+            programa: "Tecnólogo en Gestión Empresarial",
+            ficha: "3174095",
+            biografia: "Soy una persona equilibrada con intereses diversos que incluyen deporte (ciclismo, fútbol), lectura, tecnología (videojuegos, computación) y valores familiares sólidos. Con esta diversidad de intereses reflejo una personalidad bien estructurada y capacidad de balance vida-trabajo-estudio.",
+            experiencia: "Mi sólida trayectoria profesional de más de 7 años en el sector contable-financiero, donde he demostrado los valores institucionales del SENA: responsabilidad, honestidad, respeto y colaboración. Mi experiencia progresiva desde auxiliar hasta analista contable en empresas del sector bancario, cooperativo, privado y público, complementada con mi formación continua en el SENA, mi liderazgo en proyectos de la comunidad a la que pertenezco.",
+            email: "Jonathancontabilidad.96@gmail.com",
+            telefono: "+57 301 133 7375",
+            foto: null
+        };
+
+        const DEFAULT_PROPUESTAS = [
+            {
+                id: 1,
+                titulo: "Proyecto Pequeños Aprendices",
+                descripcion: "Un proyecto de inclusión social que permite a las madres acceder a formación profesional sin limitaciones por el cuidado de sus hijos menores.",
+                categoria: "bienestar"
+            },
+            {
+                id: 2,
+                titulo: "Proyecto Manos Solidarias",
+                descripcion: "Un proyecto social para los aprendices que no alcanzan a ingresar a uno de los programas del SENA por motivo de que los cupos son limitados y con apoyo de los diferentes actores en este proyecto darle un apoyo a aquellos que lo necesitan.",
+                categoria: "bienestar"
+            },
+            {
+                id: 3,
+                titulo: "Proyecto Mentores en Acción",
+                descripcion: "Un proyecto de apoyo al aprendiz que tiene problemas al enfrentarse a diferentes momentos cuando comienzan su vida laboral. Diferentes empresas generan brechas con aquellos que no logran expresarse bien ante una entrevista o vestirse adecuadamente. El proyecto está gestionado para ayudar al aprendiz a quitarse ese miedo y crecer en la vida laboral manejando sus emociones, ayudando a aumentar esas habilidades blandas cuando salen a buscar empleo.",
+                categoria: "empleo"
+            },
+            {
+                id: 4,
+                titulo: "Programa de Estímulos al Aprendiz",
+                descripcion: "Fortalecer las conexiones con empresas del sector, crear una bolsa de empleo más efectiva y garantizar prácticas profesionales de calidad para todos los programas.",
+                categoria: "academica"
+            },
+            {
+                id: 5,
+                titulo: "Plan de Mejoramiento de Servicios de Bienestar al Aprendiz",
+                descripcion: "El proyecto tiene enfoque innovador para transformar las barreras que enfrentan los aprendices de jornada madrugada en oportunidades de mejora digital, organizacional y personal.",
+                categoria: "bienestar"
+            },
+            {
+                id: 6,
+                titulo: "Plan de Implementación del Acuerdo 009 de 2024",
+                descripcion: "Este plan busca garantizar que todos los aprendices de la jornada madrugada conozcan, comprendan y ejerzan plenamente sus derechos mientras cumplen responsablemente sus deberes según el nuevo marco normativo.",
+                categoria: "academica"
+            },
+            {
+                id: 7,
+                titulo: "Plan de Acompañamiento y Desarrollo Integral del Aprendiz",
+                descripcion: "Una propuesta para crear un ecosistema de apoyo integral utilizando recursos existentes, voluntariado y optimización de presupuestos actuales para los aprendices del SENA Centro de Gestión Administrativa.",
+                categoria: "bienestar"
+            },
+            {
+                id: 8,
+                titulo: 'Programa Cultural Inclusivo - "Expresión sin Barreras"',
+                descripcion: "Plan de implementación de un programa formativo en artes, artes escénicas y lengua de señas colombiana (LSC) para aprendices de jornada madrugada, utilizando voluntarios especializados y recursos disponibles.",
+                categoria: "cultural"
+            },
+            {
+                id: 9,
+                titulo: 'Programa Deportivo Madrugada - "Deporte sin Límites"',
+                descripcion: "Plan de implementación de un programa deportivo sostenible y de recursos disponibles para aprendices de jornada madrugada, promoviendo la actividad física y la sana competencia.",
+                categoria: "cultural"
+            }
+        ];
+
+        // ==============================================
+        // CONFIGURACIÓN DE SEGURIDAD
+        // ==============================================
+
+        // CAMBIAR ESTO: Configura tu contraseña de admin aquí
+        const ADMIN_PASSWORD = "sena2024"; // ⚠️ CAMBIAR POR TU CONTRASEÑA
+        
+        // Modo admin (false = página pública, true = desarrollo)
+        let adminMode = false; // ⚠️ CAMBIAR A false PARA PUBLICAR
+        
+        // Control de sesión admin
+        let isAdminLoggedIn = false;
+        
+        // ==============================================
+        // Datos almacenados localmente (con valores predeterminados)
+        let profileData = loadFromStorage('profileData') || { ...DEFAULT_PROFILE_DATA };
+        let propuestas = loadFromStorage('propuestas') || [...DEFAULT_PROPUESTAS];
+        let deleteIndex = -1;
+
+        // Funciones de almacenamiento local
+        function saveToStorage(key, data) {
+            try {
+                const jsonData = JSON.stringify(data);
+                // Usar una implementación personalizada de almacenamiento
+                if (typeof(Storage) !== "undefined") {
+                    // Crear un objeto de almacenamiento personalizado en el window
+                    if (!window.customStorage) {
+                        window.customStorage = {};
+                    }
+                    window.customStorage[key] = jsonData;
+                    
+                    // También intentar exportar como archivo descargable
+                    createBackupFile();
+                }
+            } catch (error) {
+                console.log('Error al guardar:', error);
+            }
+        }
+
+        function loadFromStorage(key) {
+            try {
+                if (window.customStorage && window.customStorage[key]) {
+                    return JSON.parse(window.customStorage[key]);
+                }
+                return null;
+            } catch (error) {
+                console.log('Error al cargar:', error);
+                return null;
+            }
+        }
+
+        // Crear archivo de respaldo descargable
+        function createBackupFile() {
+            const backup = {
+                profileData: profileData,
+                propuestas: propuestas,
+                timestamp: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(backup, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            // Actualizar enlace de descarga si existe
+            let downloadLink = document.getElementById('backup-download');
+            if (downloadLink) {
+                downloadLink.href = dataUri;
+                downloadLink.download = `campana-sena-backup-${new Date().toISOString().split('T')[0]}.json`;
+            }
+        }
+
+        // Iconos para categorías
+        const categoryIcons = {
+            academica: '🎓',
+            bienestar: '🤝',
+            infraestructura: '🏢',
+            tecnologia: '💻',
+            cultural: '🎨',
+            sostenibilidad: '🌱',
+            empleo: '💼'
+        };
+
+        // Cambiar entre vistas con control de acceso
+        function showView(viewName) {
+            // Si intenta acceder a admin sin estar logueado
+            if (viewName === 'admin' && !isAdminLoggedIn) {
+                requestAdminAccess();
+                return;
+            }
+            
+            document.querySelectorAll('.view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(viewName + '-view').classList.add('active');
+            
+            if (viewName === 'public') {
+                updatePublicView();
+            }
+        }
+
+        // Solicitar acceso admin
+        function requestAdminAccess() {
+            document.getElementById('admin-login-modal').style.display = 'block';
+            document.getElementById('admin-password').focus();
+        }
+
+        // Verificar contraseña admin
+        function verifyAdminPassword() {
+            const inputPassword = document.getElementById('admin-password').value;
+            
+            if (inputPassword === ADMIN_PASSWORD) {
+                isAdminLoggedIn = true;
+                closeAdminModal();
+                showView('admin');
+                updateAdminButton();
+                showSuccessMessage('¡Acceso concedido! Bienvenido al panel de administración.');
+            } else {
+                alert('❌ Contraseña incorrecta. Intenta de nuevo.');
+                document.getElementById('admin-password').value = '';
+                document.getElementById('admin-password').focus();
+            }
+        }
+
+        // Cerrar modal de admin
+        function closeAdminModal() {
+            document.getElementById('admin-login-modal').style.display = 'none';
+            document.getElementById('admin-password').value = '';
+        }
+
+        // Actualizar botón admin según el estado
+        function updateAdminButton() {
+            const adminBtn = document.getElementById('admin-btn');
+            if (adminMode || isAdminLoggedIn) {
+                adminBtn.style.display = 'inline-block';
+                adminBtn.textContent = isAdminLoggedIn ? '⚙️ Panel Admin' : '🔐 Admin';
+                adminBtn.onclick = isAdminLoggedIn ? () => showView('admin') : requestAdminAccess;
+            } else {
+                adminBtn.style.display = 'none';
+            }
+        }
+
+        // Atajo de teclado secreto para desarrolladores
+        let keySequence = '';
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                adminMode = true;
+                updateAdminButton();
+                alert('🔧 Modo desarrollador activado. El botón admin ahora es visible.');
+            }
+            
+            // Secuencia secreta alternativa
+            keySequence += e.key.toLowerCase();
+            if (keySequence.includes('adminaccess')) {
+                adminMode = true;
+                updateAdminButton();
+                keySequence = '';
+                alert('🔑 Acceso de desarrollador activado.');
+            }
+            if (keySequence.length > 20) keySequence = keySequence.slice(-10);
+        });
+
+        // Actualizar perfil
+        function updateProfile() {
+            profileData.nombre = document.getElementById('admin-nombre').value;
+            profileData.eslogan = document.getElementById('admin-eslogan').value;
+            profileData.programa = document.getElementById('admin-programa').value;
+            profileData.ficha = document.getElementById('admin-ficha').value;
+            profileData.biografia = document.getElementById('admin-biografia').value;
+            profileData.experiencia = document.getElementById('admin-experiencia').value;
+            profileData.email = document.getElementById('admin-email').value;
+            profileData.telefono = document.getElementById('admin-telefono').value;
+
+            // Guardar en almacenamiento local
+            saveToStorage('profileData', profileData);
+
+            showSuccessMessage();
+            updatePublicView();
+        }
+
+        // Manejar subida de archivos
+        function handleFileUpload(input) {
+            const file = input.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('El archivo es muy grande. Máximo 5MB.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileData.foto = e.target.result;
+                    saveToStorage('profileData', profileData);
+                    updatePublicView();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Agregar propuesta
+        function addPropuesta() {
+            const titulo = document.getElementById('propuesta-titulo').value;
+            const descripcion = document.getElementById('propuesta-descripcion').value;
+            const categoria = document.getElementById('propuesta-categoria').value;
+
+            if (!titulo || !descripcion) {
+                alert('Por favor completa todos los campos de la propuesta.');
+                return;
+            }
+
+            const propuesta = {
+                id: Date.now(),
+                titulo: titulo,
+                descripcion: descripcion,
+                categoria: categoria
+            };
+
+            propuestas.push(propuesta);
+            
+            // Guardar en almacenamiento local
+            saveToStorage('propuestas', propuestas);
+            
+            // Limpiar formulario
+            document.getElementById('propuesta-titulo').value = '';
+            document.getElementById('propuesta-descripcion').value = '';
+            
+            updatePropuestasList();
+            updatePublicView();
+            showSuccessMessage();
+        }
+
+        // Actualizar lista de propuestas en admin
+        function updatePropuestasList() {
+            const container = document.getElementById('propuestas-list');
+            
+            if (propuestas.length === 0) {
+                container.innerHTML = '<p style="color: #666; font-style: italic;">No hay propuestas agregadas aún.</p>';
+                return;
+            }
+
+            container.innerHTML = propuestas.map((propuesta, index) => `
+                <div class="propuesta-item">
+                    <h4>${categoryIcons[propuesta.categoria]} ${propuesta.titulo}</h4>
+                    <p>${propuesta.descripcion}</p>
+                    <div class="propuesta-actions">
+                        <button class="btn btn-danger btn-small" onclick="deletePropuesta(${index})">🗑️ Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Eliminar propuesta
+        function deletePropuesta(index) {
+            deleteIndex = index;
+            document.getElementById('confirm-modal').style.display = 'block';
+        }
+
+        function confirmDelete() {
+            if (deleteIndex !== -1) {
+                propuestas.splice(deleteIndex, 1);
+                saveToStorage('propuestas', propuestas);
+                updatePropuestasList();
+                updatePublicView();
+                closeModal();
+                showSuccessMessage();
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('confirm-modal').style.display = 'none';
+            deleteIndex = -1;
+        }
+
+        // Actualizar vista pública
+        function updatePublicView() {
+            // Actualizar información personal
+            document.getElementById('display-nombre').textContent = profileData.nombre || 'Mi Campaña Estudiantil';
+            document.getElementById('display-eslogan').textContent = profileData.eslogan || 'Juntos construimos el futuro del SENA';
+            document.getElementById('display-nombre-perfil').textContent = profileData.nombre || 'Candidato';
+            document.getElementById('display-programa').textContent = profileData.programa || 'Sin especificar';
+            document.getElementById('display-ficha').textContent = profileData.ficha || 'Sin especificar';
+            document.getElementById('display-biografia').innerHTML = profileData.biografia ? `<p>${profileData.biografia}</p>` : '<p>¡Hola! Soy estudiante del SENA comprometido con mejorar nuestra experiencia educativa.</p>';
+            document.getElementById('display-experiencia').innerHTML = profileData.experiencia ? `<p>${profileData.experiencia}</p>` : '<p>Agrega tu experiencia desde el panel de administración.</p>';
+            document.getElementById('display-email').textContent = profileData.email || 'correo@ejemplo.com';
+            document.getElementById('display-telefono').textContent = profileData.telefono || '+57 300 123 4567';
+
+            // Actualizar foto
+            const avatarDisplay = document.getElementById('display-avatar');
+            if (profileData.foto) {
+                avatarDisplay.innerHTML = `<img src="${profileData.foto}" alt="Foto de perfil">`;
+            } else {
+                avatarDisplay.innerHTML = `<img src="representante.png" alt="Foto del representante" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
+            }
+
+            // Actualizar propuestas
+            const propuestasContainer = document.getElementById('display-propuestas');
+            if (propuestas.length === 0) {
+                propuestasContainer.innerHTML = `
+                    <div class="propuesta-card">
+                        <h3>Agrega tus propuestas</h3>
+                        <p>Utiliza el panel de administración para agregar tus propuestas de campaña.</p>
+                    </div>
+                `;
+            } else {
+                propuestasContainer.innerHTML = propuestas.map(propuesta => `
+                    <div class="propuesta-card">
+                        <h3>${categoryIcons[propuesta.categoria]} ${propuesta.titulo}</h3>
+                        <p>${propuesta.descripcion}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Descargar respaldo
+        function downloadBackup() {
+            const backup = {
+                profileData: profileData,
+                propuestas: propuestas,
+                timestamp: new Date().toISOString(),
+                version: "1.0"
+            };
+            
+            const dataStr = JSON.stringify(backup, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const downloadLink = document.createElement('a');
+            downloadLink.href = dataUri;
+            downloadLink.download = `campana-sena-backup-${new Date().toISOString().split('T')[0]}.json`;
+            downloadLink.click();
+            
+            showSuccessMessage('¡Respaldo descargado exitosamente!');
+        }
+
+        // Restaurar respaldo
+        function restoreBackup(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const backup = JSON.parse(e.target.result);
+                    
+                    if (backup.profileData && backup.propuestas) {
+                        profileData = backup.profileData;
+                        propuestas = backup.propuestas;
+                        
+                        // Guardar datos restaurados
+                        saveToStorage('profileData', profileData);
+                        saveToStorage('propuestas', propuestas);
+                        
+                        // Actualizar interfaz
+                        loadProfileToForm();
+                        updatePropuestasList();
+                        updatePublicView();
+                        
+                        showSuccessMessage('¡Respaldo restaurado exitosamente!');
+                    } else {
+                        alert('El archivo de respaldo no es válido.');
+                    }
+                } catch (error) {
+                    alert('Error al leer el archivo de respaldo.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Cargar datos del perfil al formulario
+        function loadProfileToForm() {
+            document.getElementById('admin-nombre').value = profileData.nombre || '';
+            document.getElementById('admin-eslogan').value = profileData.eslogan || '';
+            document.getElementById('admin-programa').value = profileData.programa || '';
+            document.getElementById('admin-ficha').value = profileData.ficha || '';
+            document.getElementById('admin-biografia').value = profileData.biografia || '';
+            document.getElementById('admin-experiencia').value = profileData.experiencia || '';
+            document.getElementById('admin-email').value = profileData.email || '';
+            document.getElementById('admin-telefono').value = profileData.telefono || '';
+        }
+
+        // Restaurar datos por defecto
+        function resetToDefaults() {
+            if (confirm('¿Estás seguro de que quieres restaurar los datos predeterminados? Esto sobrescribirá toda tu información actual.')) {
+                profileData = { ...DEFAULT_PROFILE_DATA };
+                propuestas = [...DEFAULT_PROPUESTAS];
+                
+                // Guardar los datos predeterminados
+                saveToStorage('profileData', profileData);
+                saveToStorage('propuestas', propuestas);
+                
+                // Actualizar interfaz
+                loadProfileToForm();
+                updatePropuestasList();
+                updatePublicView();
+                
+                showSuccessMessage('¡Datos predeterminados restaurados exitosamente!');
+            }
+        }
+        function showSuccessMessage(message = '¡Información actualizada correctamente!') {
+            const messageDiv = document.getElementById('success-message');
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Scroll a propuestas
+        function scrollToPropuestas() {
+            document.getElementById('display-propuestas').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const confirmModal = document.getElementById('confirm-modal');
+            const adminModal = document.getElementById('admin-login-modal');
+            
+            if (event.target === confirmModal) {
+                closeModal();
+            }
+            if (event.target === adminModal) {
+                closeAdminModal();
+            }
+        }
+
+        // Permitir Enter en el campo de contraseña
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('admin-password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    verifyAdminPassword();
+                }
+            });
+        });
+
+        // Inicializar aplicación
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar datos guardados
+            profileData = loadFromStorage('profileData') || profileData;
+            propuestas = loadFromStorage('propuestas') || [];
+            
+            // Si no hay propuestas guardadas, usar propuestas de ejemplo
+            if (propuestas.length === 0) {
+                propuestas = [
+                    {
+                        id: 1,
+                        titulo: "Proyecto Pequeños Aprendices",
+                        descripcion: "Un proyecto de inclusión social que permite a las madres acceder a formación profesional sin limitaciones por el cuidado de sus hijos menores.",
+                        categoria: "bienestar"
+                    },
+                    {
+                        id: 2,
+                        titulo: "Proyecto Manos Solidarias",
+                        descripcion: "Un proyecto social para los aprendices que no alcanzan a ingresar a uno de los programas del SENA por motivo de que los cupos son limitados y con apoyo de los diferentes actores en este proyecto darle un apoyo a aquellos que lo necesitan.",
+                        categoria: "bienestar"
+                    },
+                    {
+                        id: 3,
+                        titulo: "Proyecto Mentores en Acción",
+                        descripcion: "Un proyecto de apoyo al aprendiz que tiene problemas al enfrentarse a diferentes momentos cuando comienzan su vida laboral. Diferentes empresas generan brechas con aquellos que no logran expresarse bien ante una entrevista o vestirse adecuadamente. El proyecto está gestionado para ayudar al aprendiz a quitarse ese miedo y crecer en la vida laboral manejando sus emociones, ayudando a aumentar esas habilidades blandas cuando salen a buscar empleo.",
+                        categoria: "empleo"
+                    },
+                    {
+                        id: 4,
+                        titulo: "Programa de Estímulos al Aprendiz",
+                        descripcion: "Fortalecer las conexiones con empresas del sector, crear una bolsa de empleo más efectiva y garantizar prácticas profesionales de calidad para todos los programas.",
+                        categoria: "academica"
+                    },
+                    {
+                        id: 5,
+                        titulo: "Plan de Mejoramiento de Servicios de Bienestar al Aprendiz",
+                        descripcion: "El proyecto tiene enfoque innovador para transformar las barreras que enfrentan los aprendices de jornada madrugada en oportunidades de mejora digital, organizacional y personal.",
+                        categoria: "bienestar"
+                    },
+                    {
+                        id: 6,
+                        titulo: "Plan de Implementación del Acuerdo 009 de 2024",
+                        descripcion: "Este plan busca garantizar que todos los aprendices de la jornada madrugada conozcan, comprendan y ejerzan plenamente sus derechos mientras cumplen responsablemente sus deberes según el nuevo marco normativo.",
+                        categoria: "academica"
+                    },
+                    {
+                        id: 7,
+                        titulo: "Plan de Acompañamiento y Desarrollo Integral del Aprendiz",
+                        descripcion: "Una propuesta para crear un ecosistema de apoyo integral utilizando recursos existentes, voluntariado y optimización de presupuestos actuales para los aprendices del SENA Centro de Gestión Administrativa.",
+                        categoria: "bienestar"
+                    },
+                    {
+                        id: 8,
+                        titulo: 'Programa Cultural Inclusivo - "Expresión sin Barreras"',
+                        descripcion: "Plan de implementación de un programa formativo en artes, artes escénicas y lengua de señas colombiana (LSC) para aprendices de jornada madrugada, utilizando voluntarios especializados y recursos disponibles.",
+                        categoria: "cultural"
+                    },
+                    {
+                        id: 9,
+                        titulo: 'Programa Deportivo Madrugada - "Deporte sin Límites"',
+                        descripcion: "Plan de implementación de un programa deportivo sostenible y de recursos disponibles para aprendices de jornada madrugada, promoviendo la actividad física y la sana competencia.",
+                        categoria: "cultural"
+                    }
+                ];
+                saveToStorage('propuestas', propuestas);
+            }
+            
+            // Cargar datos al formulario
+            loadProfileToForm();
+            updatePropuestasList();
+            updatePublicView();
+        });
+    </script>
+</body>
+</html>
